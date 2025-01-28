@@ -179,3 +179,58 @@ int main() {
 
 */
 
+
+
+
+#include <iostream>
+using namespace std;
+class Shape {
+public:
+    virtual double area() const = 0;
+};
+
+class Rectangle : public Shape {
+private:
+    double width;
+    double height;
+public:
+    Rectangle(double w, double h) : width(w), height(h) {}
+    double area() const override {
+        return width * height;
+    }
+};
+
+class Triangle : public Shape {
+private:
+    double base;
+    double height;
+public:
+    Triangle(double b, double h) : base(b), height(h) {}
+    double area() const override {
+        return 0.5 * base * height;
+    }
+};
+
+class Square : public Shape {
+private:
+    double side;
+public:
+    Square(double s) : side(s) {}
+    double area() const override {
+        return side * side;
+    }
+};
+
+int main() {
+    Rectangle r(3, 4);
+    Triangle t(3, 4);
+    Square s(4);
+
+    Shape* shapes[] = {&r, &t, &s};
+
+    for (int i = 0; i < 3; i++) {
+        cout << "Area: " << shapes[i]->area() << endl;
+    }
+
+    return 0;
+}
